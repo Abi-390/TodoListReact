@@ -18,7 +18,7 @@ const Create = (props) => {
       isCompleted: false,
     };
     settask([...task, newTask]);
-    toast.success("Todo Created");
+    toast.success("Todo Created",{autoClose:800,});
     reset();
     console.log(newTask)
   };
