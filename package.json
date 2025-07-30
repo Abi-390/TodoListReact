@@ -14,7 +14,8 @@
     "install": "^0.13.0",
     "nanoid": "^5.1.5",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.61.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

@@ -1,45 +1,57 @@
-import { useState } from "react";
 import { nanoid } from "nanoid";
-
+import { useForm } from "react-hook-form";
 
 const Create = (props) => {
-  const task = props.task;
-  const settask = props.settask;
-  const [title, settitle] = useState("");
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const { task, settask } = props;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const submitHandler = (data) => {
     const newTask = {
-      title: title.charAt(0).toUpperCase() + title.slice(1),
+      title: data.title.charAt(0).toUpperCase() + data.title.slice(1),
       id: nanoid(),
       isCompleted: false,
     };
-    //settask([...task,newTask]);
-    let copy = [...task];
-    copy.push(newTask);
-    settask(copy);
-    settitle("");
+    settask([...task, newTask]);
+    reset();
+    console.log(newTask)
   };
 
-  const setTitle = (e) => {
-    settitle(e.target.value);
+  const deleteAll = () => {
+    settask([]);
   };
-const deleteAll=()=>{
-  settask([]);
-}
+
   return (
-    <div>
-      {" "}
-      <form className="flex items-center justify-center" onSubmit={submitHandler}>
-        <input className="mt-5 bg-gray-500 text-white px-5 mx-5 rounded-md"
-          onChange={setTitle}
-          type="text"
-          placeholder="Enter your task"
-          value={title}
-        ></input>
-        <button className="px-1 py-1 border-2 mt-5 mx-2 rounded-lg">Add Task</button>
-        <span className="px-1 py-1 border-2 mt-5 mx-2 rounded-lg" onClick={deleteAll}>Delete all task</span>
-      </form>
-    </div>
+    <form
+      className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8"
+      onSubmit={handleSubmit(submitHandler)}
+    >
+      <input
+        className="bg-gray-700 text-white px-4 py-2 rounded-md w-full md:w-1/3"
+        {...register("title", { required: true })}
+        type="text"
+        placeholder="Enter your task"
+      />
+      <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+        Add Task
+      </button>
+      <button
+        type="button"
+        onClick={deleteAll}
+        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+      >
+        Delete All Tasks
+      </button>
+      {errors.title && (
+        <p className="text-red-400 text-sm mt-2 text-center w-full">
+          Task title is required
+        </p>
+      )}
+    </form>
   );
 };
 

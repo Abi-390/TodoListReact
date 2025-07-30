@@ -4,12 +4,14 @@ import Read from "./components/Read";
 
 const App = () => {
   const [task, settask] = useState([
-    { id: 1, title: "Take shower", isCompleted: false },
+    { id: 1, title: "Example Task", isCompleted: false },
   ]);
 
   return (
-    <div className="w-screen h-screen bg-gray-800 text-white">
-      <h1 className="flex items-center justify-center bg-white text-black text-3xl">TODO LIST</h1>
+    <div className="min-h-screen bg-gray-900 text-white px-4 py-6">
+      <h1 className="text-center text-4xl font-bold mb-8 text-yellow-400">
+        TODO LIST
+      </h1>
       <Create task={task} settask={settask} />
       <Read task={task} settask={settask} />
     </div>
