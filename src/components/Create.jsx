@@ -25,6 +25,7 @@ const Create = (props) => {
 
   const deleteAll = () => {
     settask([]);
+    toast.error("All tasks deleted",{autoClose:800})
   };
 
   return (
