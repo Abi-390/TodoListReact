@@ -1,7 +1,10 @@
+import { toast } from "react-toastify";
+
 const Read = ({ task, settask }) => {
   const deleteHandler = (id) => {
     const filteredTask = task.filter((t) => t.id !== id);
     settask(filteredTask);
+    toast.error("Todo Deleted",{autoClose:800})
   };
 
   const display = task.map((t) => (
